@@ -1,0 +1,12 @@
+{
+  "name": "Cauchi Hoists Hub (DEMO)",
+  "short_name": "Hoists Hub",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f4f2",
+  "theme_color": "#1f2326",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

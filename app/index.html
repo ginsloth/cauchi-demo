@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Hoists Hub (DEMO)</title>
+<meta name="theme-color" content="#1f2326">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hoists Hub">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="demo-banner" role="note">DEMO: every name and number here is made up, to show how it works</div>
+
+<header class="topbar">
+  <div>
+    <div class="topbar-kicker">Titan + Sterling</div>
+    <h1 class="topbar-title" id="screen-title">This month</h1>
+  </div>
+  <button class="ping-btn" id="simulate" type="button">Simulate new enquiry</button>
+</header>
+
+<main id="main">
+
+  <!-- HOME -->
+  <section class="screen is-active" id="screen-home" data-title="This month" aria-labelledby="screen-title">
+    <div class="month-line" id="month-line"></div>
+
+    <div class="card">
+      <h2 class="card-title">Revenue ex GST</h2>
+      <div class="hero-number" id="rev-combined"></div>
+      <div class="split-bar" id="rev-split" role="img"></div>
+      <div class="legend" id="rev-legend"></div>
+    </div>
+
+    <div class="tiles" id="tiles"></div>
+
+    <div class="card">
+      <h2 class="card-title">Enquiries by where they came from</h2>
+      <div class="chart" id="source-chart"></div>
+      <details class="table-view">
+        <summary>Show as a table</summary>
+        <table id="source-table"></table>
+      </details>
+    </div>
+
+    <div class="card deal-card">
+      <div class="deal-head">
+        <h2 class="card-title">What the systems did, this month</h2>
+        <label class="toggle">
+          <input type="checkbox" id="sales-toggle">
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          <span class="toggle-label">Virginia runs sales (+10%)</span>
+        </label>
+      </div>
+      <table class="deal-table" id="deal-table"></table>
+      <p class="deal-note">How my share works, one job at a time (the full breakdown is in your monthly report):</p>
+      <ol class="gst-steps" id="gst-steps"></ol>
+    </div>
+  </section>
+
+  <!-- LEADS -->
+  <section class="screen" id="screen-leads" data-title="Leads">
+    <div class="filter-row" id="lead-filters" role="tablist" aria-label="Filter leads by business"></div>
+    <ul class="lead-list" id="lead-list"></ul>
+  </section>
+
+  <!-- JOBS -->
+  <section class="screen" id="screen-jobs" data-title="Titan jobs">
+    <div class="card intro-card">
+      <h2 class="card-title">Same hours, bigger jobs</h2>
+      <p>Jobs are booked by area so a day never crosses Sydney twice. Workshops with 4 or more hoists go first.</p>
+      <div class="tiles tiles-3" id="job-tiles"></div>
+    </div>
+    <div id="job-days"></div>
+  </section>
+
+  <!-- MELBOURNE -->
+  <section class="screen" id="screen-melb" data-title="Melbourne">
+    <div class="tiles" id="melb-tiles"></div>
+    <div class="card">
+      <h2 class="card-title">Does the depot pay for itself?</h2>
+      <div class="meter" id="depot-meter"></div>
+      <p class="muted" id="depot-note"></p>
+    </div>
+    <div class="card">
+      <h2 class="card-title">VIC pipeline</h2>
+      <ul class="pipe-list" id="melb-pipe"></ul>
+    </div>
+  </section>
+
+  <!-- MARKETING -->
+  <section class="screen" id="screen-mkt" data-title="Marketing">
+    <div class="card">
+      <h2 class="card-title">This month's top 3</h2>
+      <p class="muted">You ask for anything. Each month we pick three and work down the list.</p>
+      <ol class="queue" id="queue-top"></ol>
+    </div>
+    <div class="card">
+      <h2 class="card-title">Up next on the list</h2>
+      <ul class="queue queue-next" id="queue-next"></ul>
+    </div>
+    <div class="card">
+      <h2 class="card-title">Content this fortnight</h2>
+      <div class="cal-strip" id="cal-strip"></div>
+      <p class="muted">Built from the job photos and clips you send. You approve the plan, we post it.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- lead detail sheet -->
+<div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+<aside class="sheet" id="sheet" aria-hidden="true" aria-labelledby="sheet-title" role="dialog">
+  <button class="sheet-close" id="sheet-close" type="button" aria-label="Close">Close</button>
+  <div id="sheet-body"></div>
+</aside>
+
+<!-- notification -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- chart tooltip -->
+<div class="tooltip" id="tooltip" hidden></div>
+
+<nav class="tabbar" aria-label="Sections">
+  <button class="tab is-active" data-screen="home" type="button"><span class="tab-icon" aria-hidden="true">&#9673;</span>Home</button>
+  <button class="tab" data-screen="leads" type="button"><span class="tab-icon" aria-hidden="true">&#9776;</span>Leads<span class="tab-badge" id="lead-badge"></span></button>
+  <button class="tab" data-screen="jobs" type="button"><span class="tab-icon" aria-hidden="true">&#9636;</span>Jobs</button>
+  <button class="tab" data-screen="melb" type="button"><span class="tab-icon" aria-hidden="true">&#9650;</span>Melbourne</button>
+  <button class="tab" data-screen="mkt" type="button"><span class="tab-icon" aria-hidden="true">&#9733;</span>Marketing</button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
