@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Sterling logo options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&display=block" rel="stylesheet">
+<style>body{font-family:-apple-system,system-ui,sans-serif;margin:0;background:#f4f4f2;color:#1b1d20;line-height:1.5;font-size:17px}
+.w{max-width:680px;margin:0 auto;padding:20px}h1{font-size:26px;margin:8px 0 4px}h2{font-size:21px;margin:30px 0 4px;border-top:3px solid #1b1d20;padding-top:14px}
+.cap{font-size:14px;color:#666;margin:2px 0 10px}.box{background:#fff;border-radius:10px;padding:14px;border:1px solid #ddd}.dark{background:#1b1d20;border-color:#1b1d20;margin-top:8px;display:flex;align-items:center;gap:14px;padding:10px 14px}
+.dark .n{color:#c0c0c0;font-size:13px}.dark svg{width:150px;flex:none}svg{width:100%;height:auto;display:block}.note{background:#fff;border-left:5px solid #f2b705;padding:12px 14px;border-radius:6px;margin-top:26px}</style></head><body><div class="w">
+<h1>Sterling logo options</h1><p class="cap">Retro garage badge style, like the Detroit one. Each shown big on white, then small in a dark website header.</p>
+<div id="out"></div>
+<div class="note"><b>Pick one by number</b>, or mix: "3 but in the colours of 1".<br><br>Bottom line on each says <b>AUTOMOTIVE EQUIPMENT</b> or <b>HOISTS · INSTALLS · SERVICE</b>. If you want a "SINCE" year like Detroit's, I need the year from Matt's dad: I don't know it and won't guess.</div>
+</div>
+<script>
+const V=[
+ {n:1,t:"Classic Detroit colours",d:"Closest to your reference: red oval, yellow letters, navy outline and 3D drop.",oval:"#c8202a",edge:"#1d2a5c",fill:"#f6c21c",drop:"#1d2a5c",sub:"#f6c21c",font:"Passion One",w:900,sub2:"AUTOMOTIVE EQUIPMENT"},
+ {n:2,t:"Black + yellow (matches the demo site)",d:"Same badge in the site's own colours, so the logo and site look like one thing.",oval:"#2a2e33",edge:"#f2b705",ol:"#000000",fill:"#f2b705",drop:"#000000",sub:"#ffffff",font:"Passion One",w:900,sub2:"HOISTS · INSTALLS · SERVICE",line:"#f2b705"},
+ {n:3,t:"Racing script",d:"Faster, more motorsport. Closest to the movement of the old Sterling script.",oval:"#1d2a5c",edge:"#0e1430",fill:"#ffffff",drop:"#c8202a",sub:"#ffffff",font:"Racing Sans One",w:400,sub2:"AUTOMOTIVE EQUIPMENT"},
+ {n:4,t:"Black + gold (nod to the old site)",d:"Uses the gold from Sterling's current site headings. Feels older and more established.",oval:"#111111",edge:"#d9a300",ol:"#000000",fill:"#e3b11a",drop:"#6b5000",sub:"#d9a300",font:"Alfa Slab One",w:400,size:66,sub2:"AUTOMOTIVE EQUIPMENT",line:"#d9a300"},
+ {n:5,t:"Steel blue + red",d:"Sky blue nods to the old Sterling banner. Cleaner, more workshop than hot-rod.",oval:"#2f6fa8",edge:"#0e2440",fill:"#ffffff",drop:"#c8202a",sub:"#ffffff",font:"Bowlby One",w:400,sub2:"HOISTS · INSTALLS · SERVICE",size:72}
+];
+function badge(v,id){
+ const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
+ return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
+ <ellipse cx="300" cy="130" rx="276" ry="92" fill="${v.edge}"/><ellipse cx="300" cy="130" rx="264" ry="80" fill="${v.oval}"/>
+ ${v.line?`<ellipse cx="300" cy="130" rx="256" ry="72" fill="none" stroke="${v.line}" stroke-width="2" opacity=".6"/>`:""}
+ <g font-family="'${v.font}'" font-weight="${v.w}" text-anchor="middle" transform="skewX(-10) translate(22 0)">
+ ${drops}
+ <text x="300" y="128" fill="${v.fill}" stroke="${v.ol||v.edge}" stroke-width="7" stroke-linejoin="round" paint-order="stroke">${word(v,fs,big)}</text></g>
+ <text x="300" y="${v.line?188:196}" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="21" letter-spacing="3" fill="${v.sub}" ${v.sub2.length>22?'textLength="330" lengthAdjust="spacingAndGlyphs"':""}>${v.sub2}</text></svg>`;
+}
+function word(v,fs,big){return `<tspan font-size="${big}" dy="${fs*0.14}">S</tspan><tspan font-size="${fs}" dy="${-fs*0.14}">TERLING</tspan>`}
+document.fonts.ready.then(()=>{document.getElementById("out").innerHTML=V.map(v=>`<h2>${v.n}. ${v.t}</h2><p class="cap">${v.d}</p><div class="box">${badge(v)}</div><div class="box dark">${badge(v)}<span class="n">STERLING + TITAN &nbsp;·&nbsp; how it sits in the site header</span></div>`).join("");document.body.dataset.ready=1});
+</script></body></html>
