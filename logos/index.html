@@ -3,7 +3,7 @@
      PALETTE for every NEW logo until Virginia says otherwise (18 Nov 2026): Iron Core #222A2A, Industrial Aqua #4FBBBC, Rust Signal #EC4624, Heat Marker #F39120, Architectural Cream #E2DAC2. --><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
 <title>Sterling logo options</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&family=Ultra&family=Yellowtail&family=Lobster&family=Oswald:wght@600;700&display=block" rel="stylesheet">
 <style>body{font-family:-apple-system,system-ui,sans-serif;margin:0;background:#f4f4f2;color:#1b1d20;line-height:1.5;font-size:17px}
 .w{max-width:680px;margin:0 auto;padding:20px}h1{font-size:26px;margin:8px 0 4px}h2{font-size:21px;margin:30px 0 4px;border-top:3px solid #1b1d20;padding-top:14px}
 .cap{font-size:14px;color:#666;margin:2px 0 10px}.box{background:#fff;border-radius:10px;padding:14px;border:1px solid #ddd}.dark{background:#1b1d20;border-color:#1b1d20;margin-top:8px;display:flex;align-items:center;gap:14px;padding:10px 14px}
@@ -29,8 +29,37 @@ const V=[
  {n:12,t:"Like 2, aqua badge",d:"Aqua badge, cream letters, rust drop. The brightest of the set.",oval:"#4fbbbc",edge:"#222a2a",ol:"#222a2a",fill:"#e2dac2",drop:"#ec4624",sub:"#222a2a",font:"Passion One",w:900,sub2:"HOISTS · INSTALLS · SERVICE",line:"#222a2a"},
  {n:13,t:"Like 3, racing on iron",d:"Cream racing letters, rust drop, orange bottom line.",oval:"#222a2a",edge:"#ec4624",fill:"#e2dac2",drop:"#ec4624",sub:"#f39120",font:"Racing Sans One",w:400,sub2:"AUTOMOTIVE EQUIPMENT"},
  {n:14,t:"Like 4, cream badge, rust slab",d:"Cream badge, rust letters, iron outline. Feels printed, old-school sign.",oval:"#e2dac2",edge:"#222a2a",ol:"#222a2a",fill:"#ec4624",drop:"#222a2a",sub:"#222a2a",font:"Alfa Slab One",w:400,size:66,sub2:"AUTOMOTIVE EQUIPMENT",line:"#222a2a"},
- {n:15,t:"Like 5, rust badge",d:"Rust badge, cream letters, iron drop, orange inner ring.",oval:"#ec4624",edge:"#222a2a",ol:"#222a2a",fill:"#e2dac2",drop:"#222a2a",sub:"#e2dac2",font:"Bowlby One",w:400,sub2:"HOISTS · INSTALLS · SERVICE",size:72,line:"#f39120"}
+ {n:15,t:"Like 5, rust badge",d:"Rust badge, cream letters, iron drop, orange inner ring.",oval:"#ec4624",edge:"#222a2a",ol:"#222a2a",fill:"#e2dac2",drop:"#222a2a",sub:"#e2dac2",font:"Bowlby One",w:400,sub2:"HOISTS · INSTALLS · SERVICE",size:72,line:"#f39120"},
+ {n:16,kind:"moto",t:"Stacked slab, closest to Asphalt Moto",d:"Round 4: Asphalt Moto layout. Orange letters, rust shadow, on cream.",bg:"#e2dac2",fill:"#f39120",drop:"#ec4624",small:"#ec4624",acc:"#f39120",font:"Alfa Slab One"},
+ {n:17,kind:"moto",t:"Stacked slab on iron",d:"Dark background, cream letters, rust shadow, aqua small text. Fatter letters.",bg:"#222a2a",fill:"#e2dac2",drop:"#ec4624",small:"#4fbbbc",acc:"#f39120",font:"Ultra",arc:44},
+ {n:18,kind:"moto",t:"Stacked slab on aqua",d:"Aqua background, cream letters, iron shadow. Flatter top arch.",bg:"#4fbbbc",fill:"#e2dac2",drop:"#222a2a",small:"#222a2a",acc:"#ec4624",font:"Alfa Slab One",arc:80},
+ {n:19,kind:"moto",t:"Stacked slab, rust on cream",d:"Rust letters, iron shadow, orange dashes. Deeper shadow.",bg:"#e2dac2",fill:"#ec4624",drop:"#222a2a",small:"#222a2a",acc:"#f39120",font:"Ultra",deep:12},
+ {n:20,kind:"script",t:"Script + starburst on rust",d:"Wonderboy layout, no mascot: a hoist in the starburst instead.",bg:"#ec4624",fill:"#e2dac2",caps:"#e2dac2",sb:"#e2dac2",ic:"#ec4624",icon:"hoist",font:"Yellowtail"},
+ {n:21,kind:"script",t:"Script + starburst on iron",d:"Orange script with a rust shadow, aqua starburst holding an S.",bg:"#222a2a",fill:"#f39120",drop:"#ec4624",caps:"#e2dac2",sb:"#4fbbbc",ic:"#222a2a",icon:"S",font:"Yellowtail"},
+ {n:22,kind:"script",t:"Script + starburst on cream",d:"Rust script, iron capitals, orange starburst with a hoist.",bg:"#e2dac2",fill:"#ec4624",caps:"#222a2a",sb:"#f39120",ic:"#222a2a",icon:"hoist",font:"Lobster",fs:128},
+ {n:23,kind:"script",t:"Script + starburst on aqua",d:"Cream script with an iron shadow, rust starburst holding an S.",bg:"#4fbbbc",fill:"#e2dac2",drop:"#222a2a",caps:"#222a2a",sb:"#ec4624",ic:"#e2dac2",icon:"S",font:"Lobster",fs:128}
 ];
+let UID=0;
+function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
+function moto(v){const id="arc"+(++UID),k=v.arc||60,d=v.deep||8,f=`font-family="'${v.font}'" text-anchor="middle"`;
+ const big=(t,y,fs,tl)=>{const a=`x="300" y="${y}" ${f} font-size="${fs}" textLength="${tl}" lengthAdjust="spacingAndGlyphs"`;return drop(t,a,v.drop,d)+`<text ${a} fill="${v.fill}" stroke="${v.drop}" stroke-width="3" paint-order="stroke">${t}</text>`};
+ return `<svg viewBox="0 0 600 430" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="430" rx="14" fill="${v.bg}"/>
+ <path id="${id}" d="M135,150 Q300,${150-k*2} 465,150" fill="none"/>
+ <text font-family="Montserrat" font-weight="800" font-size="34" letter-spacing="2" fill="${v.small}"><textPath href="#${id}" startOffset="50%" text-anchor="middle">HOISTS &amp; SERVICE</textPath></text>
+ <text x="300" y="168" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="17" letter-spacing="2"><tspan fill="${v.acc}">~ </tspan><tspan fill="${v.small}">SYDNEY</tspan><tspan fill="${v.acc}"> ~</tspan></text>
+ ${big("STERLING",252,96,480)}${big("AUTOMOTIVE",336,78,480)}
+ <text x="300" y="380" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="27" fill="${v.small}">EQUIPMENT FOR THE WORKSHOP</text>
+ <text x="300" y="410" text-anchor="middle" font-family="Montserrat" font-weight="700" font-size="18" letter-spacing="1" fill="${v.small}">McGRATHS HILL, NSW</text></svg>`}
+function star(cx,cy,R,r,n){let p=[];for(let i=0;i<n*2;i++){const a=Math.PI*i/n-Math.PI/2,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+","+(cy+q*Math.sin(a)).toFixed(1))}return p.join(" ")}
+function scr(v){const fs=v.fs||150,cx=462,cy=272,
+ ic=v.icon==="S"?`<text x="${cx}" y="${cy+22}" text-anchor="middle" font-family="'${v.font}'" font-size="66" fill="${v.ic}">S</text>`:
+ `<g transform="translate(${cx} ${cy})" fill="${v.ic}"><rect x="-30" y="-30" width="60" height="7" rx="2"/><rect x="-28" y="-30" width="8" height="56"/><rect x="20" y="-30" width="8" height="56"/><path d="M-19,6 h38 v-8 l-7,-2 l-5,-7 h-14 l-5,7 l-7,2 z"/><circle cx="-10" cy="7" r="4.5" fill="${v.sb}"/><circle cx="10" cy="7" r="4.5" fill="${v.sb}"/><rect x="-22" y="12" width="44" height="3"/></g>`;
+ const st=`x="300" y="178" text-anchor="middle" font-family="'${v.font}'" font-size="${fs}"`;
+ return `<svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="380" rx="22" fill="${v.bg}"/>
+ <g transform="rotate(-8 300 170)">${v.drop?`<text ${st} transform="translate(4 5)" fill="${v.drop}">Sterling</text>`:""}<text ${st} fill="${v.fill}">Sterling</text></g>
+ <g font-family="Oswald" font-weight="700" font-size="44" letter-spacing="6" text-anchor="middle" fill="${v.caps}"><text x="185" y="272">AUTOMOTIVE</text><text x="185" y="324">EQUIPMENT</text></g>
+ <polygon points="${star(cx,cy,74,57,20)}" fill="${v.sb}"/><circle cx="${cx}" cy="${cy}" r="47" fill="none" stroke="${v.ic}" stroke-width="4"/>${ic}</svg>`}
+const draw=v=>v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
@@ -42,5 +71,5 @@ function badge(v,id){
  <text x="300" y="${v.line?188:196}" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="21" letter-spacing="3" fill="${v.sub}" ${v.sub2.length>22?'textLength="330" lengthAdjust="spacingAndGlyphs"':""}>${v.sub2}</text></svg>`;
 }
 function word(v,fs,big){return `<tspan font-size="${big}" dy="${fs*0.14}">S</tspan><tspan font-size="${fs}" dy="${-fs*0.14}">TERLING</tspan>`}
-document.fonts.ready.then(()=>{document.getElementById("out").innerHTML=V.map(v=>`<h2>${v.n}. ${v.t}</h2><p class="cap">${v.d}</p><div class="box">${badge(v)}</div><div class="box dark">${badge(v)}<span class="n">STERLING + TITAN &nbsp;·&nbsp; how it sits in the site header</span></div>`).join("");document.body.dataset.ready=1});
+document.fonts.ready.then(()=>{document.getElementById("out").innerHTML=V.map(v=>`<h2>${v.n}. ${v.t}</h2><p class="cap">${v.d}</p><div class="box">${draw(v)}</div><div class="box dark">${draw(v)}<span class="n">STERLING + TITAN &nbsp;·&nbsp; how it sits in the site header</span></div>`).join("");document.body.dataset.ready=1});
 </script></body></html>
