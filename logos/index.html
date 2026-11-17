@@ -38,7 +38,11 @@ const V=[
  {n:20,kind:"script",t:"Script + starburst on rust",d:"Wonderboy layout, no mascot: a hoist in the starburst instead.",bg:"#ec4624",fill:"#e2dac2",caps:"#e2dac2",sb:"#e2dac2",ic:"#ec4624",icon:"hoist",font:"Yellowtail"},
  {n:21,kind:"script",t:"Script + starburst on iron",d:"Orange script with a rust shadow, aqua starburst holding an S.",bg:"#222a2a",fill:"#f39120",drop:"#ec4624",caps:"#e2dac2",sb:"#4fbbbc",ic:"#222a2a",icon:"S",font:"Yellowtail"},
  {n:22,kind:"script",t:"Script + starburst on cream",d:"Rust script, iron capitals, orange starburst with a hoist.",bg:"#e2dac2",fill:"#ec4624",caps:"#222a2a",sb:"#f39120",ic:"#222a2a",icon:"hoist",font:"Lobster",fs:128},
- {n:23,kind:"script",t:"Script + starburst on aqua",d:"Cream script with an iron shadow, rust starburst holding an S.",bg:"#4fbbbc",fill:"#e2dac2",drop:"#222a2a",caps:"#222a2a",sb:"#ec4624",ic:"#e2dac2",icon:"S",font:"Lobster",fs:128}
+ {n:23,kind:"script",t:"Script + starburst on aqua",d:"Cream script with an iron shadow, rust starburst holding an S.",bg:"#4fbbbc",fill:"#e2dac2",drop:"#222a2a",caps:"#222a2a",sb:"#ec4624",ic:"#e2dac2",icon:"S",font:"Lobster",fs:128},
+ {n:24,kind:"label",t:"Workwear label, closest to Dickies",d:"Round 5: Dickies-style label. Orange frame, iron inside, cream diamond, rust script.",page:"#4fbbbc",border:"#f39120",inner:"#222a2a",dia:"#e2dac2",script:"#ec4624",corner:"#e2dac2",dt:"#ec4624",font:"Lobster"},
+ {n:25,kind:"label",t:"Label, orange diamond",d:"Rust frame, orange diamond, iron script with a cream shadow.",page:"#e2dac2",border:"#ec4624",inner:"#222a2a",dia:"#f39120",script:"#222a2a",drop:"#e2dac2",corner:"#e2dac2",dt:"#222a2a",font:"Lobster"},
+ {n:26,kind:"label",t:"Label, light version",d:"Orange frame, cream inside, aqua diamond, rust script. Lighter, prints well on a white shirt.",page:"#222a2a",border:"#f39120",inner:"#e2dac2",dia:"#4fbbbc",script:"#ec4624",drop:"#222a2a",corner:"#222a2a",dt:"#222a2a",font:"Yellowtail",fs:118},
+ {n:27,kind:"label",t:"Label on rust",d:"Aqua frame, rust inside, cream diamond, iron script. The loudest of the four.",page:"#222a2a",border:"#4fbbbc",inner:"#ec4624",dia:"#e2dac2",script:"#222a2a",corner:"#e2dac2",dt:"#ec4624",font:"Yellowtail",fs:118}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -60,7 +64,16 @@ function scr(v){const fs=v.fs||150,cx=462,cy=272,
  <g transform="rotate(-8 300 170)">${v.drop?`<text ${st} transform="translate(4 5)" fill="${v.drop}">Sterling</text>`:""}<text ${st} fill="${v.fill}">Sterling</text></g>
  <g font-family="Oswald" font-weight="700" font-size="44" letter-spacing="6" text-anchor="middle" fill="${v.caps}"><text x="185" y="272">AUTOMOTIVE</text><text x="185" y="324">EQUIPMENT</text></g>
  <polygon points="${star(cx,cy,74,57,20)}" fill="${v.sb}"/><circle cx="${cx}" cy="${cy}" r="47" fill="none" stroke="${v.ic}" stroke-width="4"/>${ic}</svg>`}
-const draw=v=>v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function label(v){const f=v.font,sc=`x="300" y="236" text-anchor="middle" font-family="'${f}'" font-size="${v.fs||104}" textLength="${v.tl||400}" lengthAdjust="spacingAndGlyphs"`;
+ const cw=`font-family="Oswald" font-weight="600" font-size="26" letter-spacing="2" fill="${v.corner}"`;
+ return `<svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="420" rx="14" fill="${v.page}"/>
+ <rect x="60" y="40" width="480" height="340" rx="10" fill="${v.border}"/><rect x="74" y="54" width="452" height="312" rx="4" fill="${v.inner}"/>
+ <polygon points="300,78 478,210 300,342 122,210" fill="${v.dia}"/>
+ <text x="94" y="104" ${cw}>AUTOMOTIVE</text><text x="506" y="104" text-anchor="end" ${cw}>EQUIPMENT</text>
+ <text x="94" y="346" ${cw}>HOISTS</text><text x="506" y="346" text-anchor="end" ${cw}>SERVICE</text>
+ <g font-family="Oswald" font-weight="700" font-size="24" letter-spacing="2" text-anchor="middle" fill="${v.dt}"><text x="300" y="140">SYDNEY</text><text x="300" y="304">NSW</text></g>
+ ${v.drop?`<text ${sc} transform="translate(4 4)" fill="${v.drop}">Sterling</text>`:""}<text ${sc} fill="${v.script}">Sterling</text></svg>`}
+const draw=v=>v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
