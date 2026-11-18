@@ -3,7 +3,7 @@
      PALETTE for every NEW logo until Virginia says otherwise (18 Nov 2026): Iron Core #222A2A, Industrial Aqua #4FBBBC, Rust Signal #EC4624, Heat Marker #F39120, Architectural Cream #E2DAC2. --><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
 <title>Sterling logo options</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&family=Ultra&family=Sacramento&family=Anton&family=Kaushan+Script&family=Shrikhand&family=Abril+Fatface&family=Yeseva+One&family=Yellowtail&family=Lobster&family=Oswald:wght@600;700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&family=Ultra&family=Archivo+Black&family=Sacramento&family=Anton&family=Kaushan+Script&family=Shrikhand&family=Abril+Fatface&family=Yeseva+One&family=Yellowtail&family=Lobster&family=Oswald:wght@600;700&display=block" rel="stylesheet">
 <style>body{font-family:-apple-system,system-ui,sans-serif;margin:0;background:#f4f4f2;color:#1b1d20;line-height:1.5;font-size:17px}
 .w{max-width:680px;margin:0 auto;padding:20px}h1{font-size:26px;margin:8px 0 4px}h2{font-size:21px;margin:30px 0 4px;border-top:3px solid #1b1d20;padding-top:14px}
 .cap{font-size:14px;color:#666;margin:2px 0 10px}.box{background:#fff;border-radius:10px;padding:14px;border:1px solid #ddd}.dark{background:#1b1d20;border-color:#1b1d20;margin-top:8px;display:flex;align-items:center;gap:14px;padding:10px 14px}
@@ -77,7 +77,15 @@ const V=[
  {n:58,kind:"harr5",t:"Sterling Automotive on cream",d:"Rust script, iron frame and word.",bg:"#e2dac2",frame:"#222a2a",script:"#ec4624",caps:"#222a2a",word:"AUTOMOTIVE"},
  {n:59,kind:"harr5",t:"Sterling Automotive Equipment on cream",d:"Rust script, iron frame and words.",bg:"#e2dac2",frame:"#222a2a",script:"#ec4624",caps:"#222a2a",word:"AUTOMOTIVE EQUIPMENT"},
  {n:60,kind:"harr5",t:"Sterling Automotive on rust",d:"Cream script and word, iron frame.",bg:"#ec4624",frame:"#222a2a",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE"},
- {n:61,kind:"harr5",t:"Sterling Automotive Equipment on aqua",d:"Cream script, iron frame and words.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"AUTOMOTIVE EQUIPMENT"}
+ {n:61,kind:"harr5",t:"Sterling Automotive Equipment on aqua",d:"Cream script, iron frame and words.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"AUTOMOTIVE EQUIPMENT"},
+ {n:62,kind:"parts",t:"Shop sign, closest to Parts &amp; Labor",d:"Round 11: Parts &amp; Labor layout. Cream block letters with an iron drop on rust. Real address, office number and Sterling's own tagline.",bg:"#ec4624",ink:"#222a2a",fill:"#e2dac2",drop:"#222a2a"},
+ {n:63,kind:"parts",t:"Shop sign on aqua",d:"Cream letters, iron drop, iron small type. Flatter arch.",bg:"#4fbbbc",ink:"#222a2a",fill:"#e2dac2",drop:"#222a2a",arch:52},
+ {n:64,kind:"parts",t:"Shop sign on iron",d:"Orange letters with a rust drop, cream small type.",bg:"#222a2a",ink:"#e2dac2",fill:"#f39120",drop:"#ec4624",mid:"HOISTS"},
+ {n:65,kind:"parts",t:"Shop sign on cream",d:"Rust letters, deep iron drop, iron small type.",bg:"#e2dac2",ink:"#222a2a",fill:"#ec4624",drop:"#222a2a",deep:12},
+ {n:66,kind:"carh",t:"Bold script, closest to Carhartt",d:"Round 12: Carhartt layout. Heavy one-pen script, the t's crossbar flicks out long to the right, AUTOMOTIVE under the right.",bg:"#f39120",ink:"#222a2a",word:"AUTOMOTIVE"},
+ {n:67,kind:"carh",t:"Bold script on iron",d:"Cream on iron, full name underneath.",bg:"#222a2a",ink:"#e2dac2",word:"AUTOMOTIVE EQUIPMENT"},
+ {n:68,kind:"carh",t:"Bold script on cream",d:"Rust on cream, a touch lighter pen, flatter.",bg:"#e2dac2",ink:"#ec4624",word:"AUTOMOTIVE",pen:6,tilt:-2},
+ {n:69,kind:"carh",t:"Bold script on aqua",d:"Iron on aqua, heavier pen, steeper climb, longer crossbar, full name.",bg:"#4fbbbc",ink:"#222a2a",word:"AUTOMOTIVE EQUIPMENT",pen:10,tilt:-6,barEnd:420}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -187,7 +195,23 @@ function harr5(v){const cid="sc"+(++UID),bg=v.bg,PEN=10.6,sc=`x="300" y="215" te
  ${lines(bg,PEN+12)}<text ${sc} fill="${bg}" stroke="${bg}" stroke-width="${5+9}">Sterling</text>
  ${word}
  ${lines(v.script,PEN)}<text ${sc} fill="${v.script}" stroke="${v.script}" stroke-width="5" clip-path="url(#${cid})">Sterling</text></svg>`}
-const draw=v=>v.kind==="harr5"?harr5(v):v.kind==="harr4"?harr4(v):v.kind==="harr3"?harr3(v):v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function parts(v){const id="pa"+(++UID),ink=v.ink,big=(t,y,fs,tl)=>{const a=`x="300" y="${y}" text-anchor="middle" font-family="'${v.font||"Archivo Black"}'" font-size="${fs}" textLength="${tl}" lengthAdjust="spacingAndGlyphs"`;
+  return drop(t,a,v.drop,v.deep||9)+`<text ${a} fill="${v.fill}" stroke="${v.drop}" stroke-width="3" paint-order="stroke">${t}</text>`};
+ const sm=(t,y,fs,ls,x)=>`<text x="${x||300}" y="${y}" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="${fs}" letter-spacing="${ls||1}" fill="${ink}">${t}</text>`;
+ return `<svg viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="520" rx="16" fill="${v.bg}"/>
+ <path id="${id}" d="M150,92 Q300,${v.arch||34} 450,92" fill="none"/>
+ <text font-family="Oswald" font-weight="700" font-size="46" letter-spacing="2" fill="${ink}"><textPath href="#${id}" startOffset="50%" text-anchor="middle">${v.top||"EQUIPMENT"}</textPath></text>
+ ${sm("·NSW·",140,26,2,150)}${sm(v.mid||"HOISTS",146,46,2)}${sm("·AU·",140,26,2,452)}
+ ${big("STERLING",250,108,500)}${big("AUTOMOTIVE",345,92,500)}
+ ${sm("McGRATHS HILL NSW",408,44,2)}${sm("(02) 4577 8308",452,36,2)}
+ <text x="300" y="494" text-anchor="middle" font-family="'Kaushan Script'" font-size="27" fill="${ink}">Supplying Your Automotive Equipment Needs</text></svg>`}
+function carh(v){const s=v.pen||8,W=5.2+s,sc=`x="300" y="215" text-anchor="middle" font-family="Sacramento" font-size="150" stroke-linejoin="round" stroke-linecap="round"`;
+ const bar=`<line x1="200" y1="141.8" x2="${v.barEnd||338}" y2="141.8" stroke="${v.ink}" stroke-width="${W}" stroke-linecap="round"/>`;
+ const words=v.word==="AUTOMOTIVE"?`<text x="${v.wx||520}" y="${v.wy||338}" text-anchor="end" font-family="Montserrat" font-weight="800" font-size="30" letter-spacing="5" fill="${v.ink}">AUTOMOTIVE</text>`
+  :`<text x="${v.wx||520}" y="${v.wy||338}" text-anchor="end" font-family="Montserrat" font-weight="800" font-size="24" letter-spacing="3" fill="${v.ink}">AUTOMOTIVE EQUIPMENT</text>`;
+ return `<svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="380" rx="16" fill="${v.bg}"/>
+ <g transform="rotate(${v.tilt||-4} 300 200)">${bar}<text ${sc} fill="${v.ink}" stroke="${v.ink}" stroke-width="${s}">Sterling</text></g>${words}</svg>`}
+const draw=v=>v.kind==="parts"?parts(v):v.kind==="carh"?carh(v):v.kind==="harr5"?harr5(v):v.kind==="harr4"?harr4(v):v.kind==="harr3"?harr3(v):v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
