@@ -3,7 +3,7 @@
      PALETTE for every NEW logo until Virginia says otherwise (18 Nov 2026): Iron Core #222A2A, Industrial Aqua #4FBBBC, Rust Signal #EC4624, Heat Marker #F39120, Architectural Cream #E2DAC2. --><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
 <title>Sterling logo options</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&family=Ultra&family=Anton&family=Kaushan+Script&family=Shrikhand&family=Abril+Fatface&family=Yeseva+One&family=Yellowtail&family=Lobster&family=Oswald:wght@600;700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700;900&family=Racing+Sans+One&family=Alfa+Slab+One&family=Bowlby+One&family=Montserrat:wght@700;800&family=Ultra&family=Sacramento&family=Anton&family=Kaushan+Script&family=Shrikhand&family=Abril+Fatface&family=Yeseva+One&family=Yellowtail&family=Lobster&family=Oswald:wght@600;700&display=block" rel="stylesheet">
 <style>body{font-family:-apple-system,system-ui,sans-serif;margin:0;background:#f4f4f2;color:#1b1d20;line-height:1.5;font-size:17px}
 .w{max-width:680px;margin:0 auto;padding:20px}h1{font-size:26px;margin:8px 0 4px}h2{font-size:21px;margin:30px 0 4px;border-top:3px solid #1b1d20;padding-top:14px}
 .cap{font-size:14px;color:#666;margin:2px 0 10px}.box{background:#fff;border-radius:10px;padding:14px;border:1px solid #ddd}.dark{background:#1b1d20;border-color:#1b1d20;margin-top:8px;display:flex;align-items:center;gap:14px;padding:10px 14px}
@@ -71,7 +71,13 @@ const V=[
  {n:52,kind:"harr4",t:"Like 44, one continuous flick each end",d:"Round 9d: the S's bottom stroke and the g's exit run straight out as one smooth flick, thinning to a rounded tip. AUTOMOTIVE EQUIPMENT in bold underneath.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2"},
  {n:53,kind:"harr4",t:"52 on cream",d:"Rust script, iron frame and words.",bg:"#e2dac2",frame:"#222a2a",script:"#ec4624",caps:"#222a2a"},
  {n:54,kind:"harr4",t:"52 on rust",d:"Cream script and words, iron frame.",bg:"#ec4624",frame:"#222a2a",script:"#e2dac2",caps:"#e2dac2"},
- {n:55,kind:"harr4",t:"52 on aqua",d:"Cream script, iron frame and words.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a"}
+ {n:55,kind:"harr4",t:"52 on aqua",d:"Cream script, iron frame and words.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a"},
+ {n:56,kind:"harr5",t:"Sterling Automotive, one pen line (like Harrison)",d:"Round 10: rebuilt on a monoline script, so every letter and both lines are the same pen width. The S starts as the left line and the g finishes as the right line, one unbroken stroke each.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE"},
+ {n:57,kind:"harr5",t:"Sterling Automotive Equipment, one pen line",d:"Same as 56 with the full name underneath.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE EQUIPMENT"},
+ {n:58,kind:"harr5",t:"Sterling Automotive on cream",d:"Rust script, iron frame and word.",bg:"#e2dac2",frame:"#222a2a",script:"#ec4624",caps:"#222a2a",word:"AUTOMOTIVE"},
+ {n:59,kind:"harr5",t:"Sterling Automotive Equipment on cream",d:"Rust script, iron frame and words.",bg:"#e2dac2",frame:"#222a2a",script:"#ec4624",caps:"#222a2a",word:"AUTOMOTIVE EQUIPMENT"},
+ {n:60,kind:"harr5",t:"Sterling Automotive on rust",d:"Cream script and word, iron frame.",bg:"#ec4624",frame:"#222a2a",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE"},
+ {n:61,kind:"harr5",t:"Sterling Automotive Equipment on aqua",d:"Cream script, iron frame and words.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"AUTOMOTIVE EQUIPMENT"}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -170,7 +176,18 @@ function harr4(v){const bg=v.bg,sc=`x="300" y="222" text-anchor="middle" font-fa
  <text ${sc} fill="${bg}" stroke="${bg}" stroke-width="16" stroke-linejoin="round">Sterling</text>
  ${FL.map(d=>`<path d="${d}" fill="${v.script}"/>`).join("")}<text ${sc} fill="${v.script}" clip-path="url(#${cid})">Sterling</text>
  <text x="300" y="282" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="25" letter-spacing="3" fill="${v.caps}">AUTOMOTIVE EQUIPMENT</text></svg>`}
-const draw=v=>v.kind==="harr4"?harr4(v):v.kind==="harr3"?harr3(v):v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function crs(P){let d=`M${P[0][0]},${P[0][1]}`;for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||P[i+1];d+=` C${(p1[0]+(p2[0]-p0[0])/6).toFixed(2)},${(p1[1]+(p2[1]-p0[1])/6).toFixed(2)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(2)},${(p2[1]-(p3[1]-p1[1])/6).toFixed(2)} ${p2[0]},${p2[1]}`}return d}
+function harr5(v){const cid="sc"+(++UID),bg=v.bg,PEN=10.6,sc=`x="300" y="215" text-anchor="middle" font-family="Sacramento" font-size="150" stroke-linejoin="round" stroke-linecap="round"`;
+ const FL=[crs([[150,214.85],[140,214],[130,212.4],[120,209.4],[110,205.2],[96,200.4],[78,197],[52,195],[22,194.6]]),`M520.8,195 C527.8,182.8 540,170 578,168.5`];
+ const word=v.word==="AUTOMOTIVE"?`<text x="280" y="294" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="27" letter-spacing="6" fill="${v.caps}">AUTOMOTIVE</text>`
+  :`<text x="281" y="293" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="20.5" letter-spacing="2.2" fill="${v.caps}">AUTOMOTIVE EQUIPMENT</text>`;
+ const lines=(c,w)=>FL.map(d=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`).join("");
+ return `<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="${cid}"><path d="M0,0 H600 V400 H0 Z M90,190 H118 V228 H90 Z" clip-rule="evenodd"/></clipPath></defs><rect width="600" height="400" rx="16" fill="${bg}"/>
+ <rect x="62" y="88" width="476" height="230" rx="66" fill="none" stroke="${v.frame}" stroke-width="10.6"/>
+ ${lines(bg,PEN+12)}<text ${sc} fill="${bg}" stroke="${bg}" stroke-width="${5+9}">Sterling</text>
+ ${word}
+ ${lines(v.script,PEN)}<text ${sc} fill="${v.script}" stroke="${v.script}" stroke-width="5" clip-path="url(#${cid})">Sterling</text></svg>`}
+const draw=v=>v.kind==="harr5"?harr5(v):v.kind==="harr4"?harr4(v):v.kind==="harr3"?harr3(v):v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
