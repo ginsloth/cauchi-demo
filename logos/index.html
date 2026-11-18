@@ -55,7 +55,11 @@ const V=[
  {n:36,kind:"pierce",t:"Badge, closest to Pierce, spanner",d:"Round 8: Pierce Vintage layout. All rust on cream, a spanner in the middle.",bg:"#e2dac2",line:"#ec4624",script:"#ec4624",caps:"#ec4624",ic:"#ec4624",icon:"spanner",font:"Kaushan Script"},
  {n:37,kind:"pierce",t:"Badge on iron, tyre",d:"Cream outline, orange script, rust tyre in the middle.",bg:"#222a2a",line:"#e2dac2",script:"#f39120",caps:"#e2dac2",ic:"#ec4624",star:"#ec4624",icon:"tyre",font:"Kaushan Script"},
  {n:38,kind:"pierce",t:"Badge on aqua, hoist",d:"Iron outline and letters on aqua, cream hoist in the middle.",bg:"#4fbbbc",line:"#222a2a",script:"#222a2a",caps:"#222a2a",ic:"#e2dac2",star:"#e2dac2",icon:"hoist",font:"Lobster",fs:104},
- {n:39,kind:"pierce",t:"Badge two-tone, crossed spanners",d:"Rust script, iron outline and words, cream badge on orange, crossed spanners.",bg:"#f39120",fill:"#e2dac2",line:"#222a2a",script:"#ec4624",caps:"#222a2a",ic:"#222a2a",icon:"spanners",font:"Lobster",fs:104}
+ {n:39,kind:"pierce",t:"Badge two-tone, crossed spanners",d:"Rust script, iron outline and words, cream badge on orange, crossed spanners.",bg:"#f39120",fill:"#e2dac2",line:"#222a2a",script:"#ec4624",caps:"#222a2a",ic:"#222a2a",icon:"spanners",font:"Lobster",fs:104},
+ {n:40,kind:"harr",t:"Script in a frame, closest to Harrison",d:"Round 9: Harrison layout. Cream script with long swooshes breaking a rust frame, on iron.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE",font:"Yellowtail"},
+ {n:41,kind:"harr",t:"Frame on cream",d:"Rust script, aqua frame, iron SYDNEY underneath.",bg:"#e2dac2",frame:"#4fbbbc",script:"#ec4624",caps:"#222a2a",word:"SYDNEY",font:"Yellowtail",cls:9},
+ {n:42,kind:"harr",t:"Frame on rust",d:"Iron script, cream frame, full name underneath in smaller letters.",bg:"#ec4624",frame:"#e2dac2",script:"#222a2a",caps:"#e2dac2",word:"AUTOMOTIVE EQUIPMENT",font:"Yellowtail",cfs:20,cls:2,capY:280},
+ {n:43,kind:"harr",t:"Frame on aqua, chunkier script",d:"Cream brush script, iron frame and EQUIPMENT underneath.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"EQUIPMENT",font:"Kaushan Script",fs:112,capY:290}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -117,7 +121,15 @@ function pierce(v){const sc=`x="${v.sx||285}" y="160" text-anchor="middle" font-
  <text x="168" y="236" ${cap}>AUTOMOTIVE</text><text x="432" y="236" ${cap}>EQUIPMENT</text>
  <g transform="translate(300 252) scale(0.78)">${icon(v.icon,v.ic,v.fill||v.bg)}</g></svg>`}
 function star2(cx,cy,R,r,n){let p=[];for(let i=0;i<n*2;i++){const a=Math.PI*i/n-Math.PI/2,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+","+(cy+q*Math.sin(a)).toFixed(1))}return p.join(" ")}
-const draw=v=>v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function harr(v){const fs=v.fs||132,sy=226,bg=v.bg;
+ const sc=`x="300" y="${sy}" text-anchor="middle" font-family="'${v.font}'" font-size="${fs}"`;
+ const sw=(x1,x2,w,c)=>`<line x1="${x1}" y1="${sy-14}" x2="${x2}" y2="${sy-14}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+ return `<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="400" rx="16" fill="${bg}"/>
+ <rect x="92" y="118" width="416" height="196" rx="62" fill="none" stroke="${v.frame}" stroke-width="11"/>
+ ${sw(40,150,22,bg)}${sw(450,560,22,bg)}${sw(40,150,8,v.script)}${sw(450,560,8,v.script)}
+ <text ${sc} fill="${v.script}" stroke="${bg}" stroke-width="16" stroke-linejoin="round" paint-order="stroke">Sterling</text>
+ <text x="300" y="${v.capY||286}" text-anchor="middle" font-family="Montserrat" font-weight="700" font-size="${v.cfs||32}" letter-spacing="${v.cls||5}" fill="${v.caps}">${v.word}</text></svg>`}
+const draw=v=>v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
