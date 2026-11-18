@@ -51,7 +51,11 @@ const V=[
  {n:32,kind:"amf",t:"Stacked caps + script, closest to AMF",d:"Round 7: AMF style. Iron capitals, rust script cutting across, small SAE badge.",bg:"#e2dac2",stack:"#222a2a",script:"#ec4624",sh:"#e2dac2",hex:"#ec4624",hexT:"#e2dac2",font:"Kaushan Script",lines:["BUILT","TO","LIFT"]},
  {n:33,kind:"amf",t:"Stacked caps on rust",d:"Cream capitals naming the three jobs, dark script with a rust edge, aqua badge.",bg:"#ec4624",stack:"#e2dac2",script:"#222a2a",sh:"#ec4624",hex:"#4fbbbc",hexT:"#222a2a",font:"Yellowtail",lines:["HOISTS","INSTALLS","SERVICE"],fs:100},
  {n:34,kind:"amf",t:"Stacked caps on iron",d:"Aqua capitals, orange script, rust badge. Tighter, darker.",bg:"#222a2a",stack:"#4fbbbc",script:"#f39120",sh:"#222a2a",hex:"#ec4624",hexT:"#e2dac2",font:"Kaushan Script",lines:["AUTOMOTIVE","EQUIPMENT"],fs:96},
- {n:35,kind:"amf",t:"Stacked caps on aqua",d:"Iron capitals, cream script with a fat iron outline, iron badge.",bg:"#4fbbbc",stack:"#222a2a",script:"#e2dac2",sh:"#222a2a",shw:14,hex:"#222a2a",hexT:"#e2dac2",font:"Lobster",lines:["BUILT","TO","LIFT"]}
+ {n:35,kind:"amf",t:"Stacked caps on aqua",d:"Iron capitals, cream script with a fat iron outline, iron badge.",bg:"#4fbbbc",stack:"#222a2a",script:"#e2dac2",sh:"#222a2a",shw:14,hex:"#222a2a",hexT:"#e2dac2",font:"Lobster",lines:["BUILT","TO","LIFT"]},
+ {n:36,kind:"pierce",t:"Badge, closest to Pierce, spanner",d:"Round 8: Pierce Vintage layout. All rust on cream, a spanner in the middle.",bg:"#e2dac2",line:"#ec4624",script:"#ec4624",caps:"#ec4624",ic:"#ec4624",icon:"spanner",font:"Kaushan Script"},
+ {n:37,kind:"pierce",t:"Badge on iron, tyre",d:"Cream outline, orange script, rust tyre in the middle.",bg:"#222a2a",line:"#e2dac2",script:"#f39120",caps:"#e2dac2",ic:"#ec4624",star:"#ec4624",icon:"tyre",font:"Kaushan Script"},
+ {n:38,kind:"pierce",t:"Badge on aqua, hoist",d:"Iron outline and letters on aqua, cream hoist in the middle.",bg:"#4fbbbc",line:"#222a2a",script:"#222a2a",caps:"#222a2a",ic:"#e2dac2",star:"#e2dac2",icon:"hoist",font:"Lobster",fs:104},
+ {n:39,kind:"pierce",t:"Badge two-tone, crossed spanners",d:"Rust script, iron outline and words, cream badge on orange, crossed spanners.",bg:"#f39120",fill:"#e2dac2",line:"#222a2a",script:"#ec4624",caps:"#222a2a",ic:"#222a2a",icon:"spanners",font:"Lobster",fs:104}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -96,7 +100,24 @@ function amf(v){const fs=v.fs||112,L=v.lines,y0=150,step=fs*0.9;
  const hy=sy+70,hex=`<polygon points="262,${hy} 272,${hy-20} 328,${hy-20} 338,${hy} 328,${hy+20} 272,${hy+20}" fill="${v.hex}"/><text x="300" y="${hy+8}" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="22" letter-spacing="1" fill="${v.hexT}">SAE</text>`;
  return `<svg viewBox="0 0 600 ${hy+50}" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="${hy+50}" rx="16" fill="${v.bg}"/>${st}
  <g transform="rotate(-6 300 ${sy})">${v.sh?`<text ${sa} fill="${v.sh}" stroke="${v.sh}" stroke-width="${v.shw||10}" stroke-linejoin="round">Sterling</text>`:""}<text ${sa} fill="${v.script}">Sterling</text></g>${hex}</svg>`}
-const draw=v=>v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function icon(kind,c,bg){
+ const wr=(r)=>`<g transform="rotate(${r})"><rect x="-6" y="-34" width="12" height="68" rx="4" fill="${c}"/><circle cy="-38" r="15" fill="${c}"/><rect x="-5.5" y="-58" width="11" height="22" fill="${bg}"/><circle cy="38" r="12" fill="${c}"/><circle cy="38" r="5.5" fill="${bg}"/></g>`;
+ if(kind==="spanner")return wr(-40);
+ if(kind==="spanners")return wr(-40)+wr(40);
+ if(kind==="tyre")return `<circle r="44" fill="${c}"/><circle r="44" fill="none" stroke="${bg}" stroke-width="5" stroke-dasharray="6 7"/><circle r="27" fill="${bg}"/><circle r="21" fill="${c}"/><circle r="7" fill="${bg}"/>${[0,72,144,216,288].map(a=>`<circle cx="${(14*Math.cos(a*Math.PI/180)).toFixed(1)}" cy="${(14*Math.sin(a*Math.PI/180)).toFixed(1)}" r="2.6" fill="${bg}"/>`).join("")}`;
+ return `<g transform="scale(1.45)" fill="${c}"><rect x="-30" y="-30" width="60" height="7" rx="2"/><rect x="-28" y="-30" width="8" height="56"/><rect x="20" y="-30" width="8" height="56"/><path d="M-19,6 h38 v-8 l-7,-2 l-5,-7 h-14 l-5,7 l-7,2 z"/><circle cx="-10" cy="7" r="4.5" fill="${bg}"/><circle cx="10" cy="7" r="4.5" fill="${bg}"/><rect x="-22" y="12" width="44" height="3"/></g>`}
+function pierce(v){const sc=`x="${v.sx||285}" y="160" text-anchor="middle" font-family="'${v.font}'" font-size="${v.fs||112}"`;
+ const cap=`font-family="Oswald" font-weight="700" font-size="24" letter-spacing="2" text-anchor="middle" fill="${v.caps}"`;
+ return `<svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="380" rx="16" fill="${v.bg}"/>
+ <path d="M58,80 Q70,96 82,100 L518,100 Q530,96 542,80 L536,262 L300,318 L64,262 Z" fill="${v.fill||v.bg}" stroke="${v.line}" stroke-width="9" stroke-linejoin="round"/>
+ <polygon points="70,270 300,326 530,270 530,288 300,346 70,288" fill="${v.line}"/>
+ <path d="M${v.sx?v.sx+150:430},150 C475,156 505,140 528,124" fill="none" stroke="${v.script}" stroke-width="7" stroke-linecap="round"/>
+ <text ${sc} fill="${v.script}" stroke="${v.fill||v.bg}" stroke-width="14" stroke-linejoin="round" paint-order="stroke">Sterling</text>
+ <polygon points="${star2(118,92,11,4.5,5)}" fill="${v.star||v.script}"/>
+ <text x="168" y="236" ${cap}>AUTOMOTIVE</text><text x="432" y="236" ${cap}>EQUIPMENT</text>
+ <g transform="translate(300 252) scale(0.78)">${icon(v.icon,v.ic,v.fill||v.bg)}</g></svg>`}
+function star2(cx,cy,R,r,n){let p=[];for(let i=0;i<n*2;i++){const a=Math.PI*i/n-Math.PI/2,q=i%2?r:R;p.push((cx+q*Math.cos(a)).toFixed(1)+","+(cy+q*Math.sin(a)).toFixed(1))}return p.join(" ")}
+const draw=v=>v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
