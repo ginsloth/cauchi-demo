@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var COLORS = { titan: "#2a78d6", sterling: "#eb6834" };
+  var COLORS = { titan: "#4FBBBC", sterling: "#EC4624" };
   var BIZ = { titan: "Titan", sterling: "Sterling" };
 
   var DATA = {
@@ -52,25 +52,8 @@
         { title: "Example Smash Repairs", sub: "Service, 5 hoists", value: 1375, multi: true }
       ] }
     ],
-    melb: {
-      tiles: [
-        { label: "VIC enquiries", value: "11", sub: "this month" },
-        { label: "Hoists reserved", value: "4", sub: "for the depot stock" },
-        { label: "VIC sales", value: "$27,600", sub: "ex GST" },
-        { label: "Install trip", value: "2 weeks", sub: "pencilled for Feb" }
-      ],
-      depotCost: 8500,
-      depotMargin: 11200,
-      pipe: [
-        { name: "Example Fleet Services", sub: "Tullamarine, 3 hoists", value: 14200, stage: "Quote sent" },
-        { name: "Test Diesel Co", sub: "Campbellfield, 4-post", value: 7900, stage: "Booked" },
-        { name: "Demo Garage 2", sub: "Geelong, tyre changer combo", value: 3100, stage: "Replied" },
-        { name: "Sample 4x4", sub: "Ballarat, aerosol reorder", value: 380, stage: "Won" }
-      ]
-    },
     queueTop: [
-      { title: "New family website", sub: "Hoists, installs, servicing, Melbourne page", state: "In build" },
-      { title: "Google profile for Melbourne", sub: "So VIC buyers find a local", state: "Next" },
+      { title: "New family website", sub: "Hoists, installs, servicing", state: "In build" },
       { title: "Aerosol 6-pack follow-up", sub: "Free pack after every install, then reorder texts", state: "Next" }
     ],
     queueNext: [
@@ -84,7 +67,7 @@
       { d: "Tue 10", posts: [{ b: "sterling", t: "Stock in" }] },
       { d: "Wed 11", posts: [] },
       { d: "Thu 12", posts: [{ b: "titan", t: "Fit-out" }, { b: "sterling", t: "Tip" }] },
-      { d: "Fri 13", posts: [{ b: "sterling", t: "VIC" }] },
+      { d: "Fri 13", posts: [{ b: "sterling", t: "Freight" }] },
       { d: "Sat 14", posts: [{ b: "titan", t: "Reel" }] },
       { d: "Sun 15", posts: [] }
     ]
@@ -146,16 +129,10 @@
     });
 
     renderDeal();
-    $("sales-toggle").addEventListener("change", renderDeal);
   }
 
   function renderDeal() {
-    var withSales = $("sales-toggle").checked;
-    var rate = withSales ? 0.30 : 0.20;
-    var pct = withSales ? "30%" : "20%";
-    var r = DATA.revenue, total = r.titan + r.sterling;
-    var counted = total - DATA.between - DATA.preSigning;
-    var share = counted * rate, gst = share * 0.10, invoice = share + gst;
+    var rate = 0.20, pct = "20%";
     $("deal-table").innerHTML =
       '<tr class="total"><td>New work the systems brought in</td><td>' + money(DATA.newFromSystems) + "</td></tr>" +
       "<tr><td>Old customers brought back by text</td><td>12 jobs</td></tr>" +
@@ -163,8 +140,8 @@
       "<tr><td>Referrals from happy customers</td><td>8</td></tr>" +
       '<tr class="minus"><td>Anything you had booked before signing</td><td>yours, not counted</td></tr>' +
       '<tr class="minus"><td>Hoists Sterling sells to Titan</td><td>counted once</td></tr>';
-    var job = 5500, ex = job / 1.1, cut = ex * rate, inv = cut * 1.1;
-    var steps = [money(job) + " job", money(ex) + " ex GST", pct + " " + money(cut), "invoice " + money(inv)];
+    var job = 5500, ex = job / 1.1, cut = ex * rate;
+    var steps = [money(job) + " job", money(ex) + " ex GST", pct + " " + money(cut)];
     var ol = $("gst-steps");
     ol.innerHTML = "";
     steps.forEach(function (s, i) {
@@ -263,29 +240,6 @@
     });
   }
 
-  /* MELBOURNE */
-  function renderMelb() {
-    var m = DATA.melb;
-    m.tiles.forEach(function (t) {
-      $("melb-tiles").appendChild(el("div", "tile", '<div class="tile-label">' + t.label + '</div><div class="tile-value">' + t.value + '</div><div class="tile-sub">' + t.sub + "</div>"));
-    });
-    var max = Math.max(m.depotCost, m.depotMargin);
-    var meter = $("depot-meter");
-    [["Melbourne margin", m.depotMargin, COLORS.sterling], ["Depot cost / month", m.depotCost, "#6e767c"]].forEach(function (row) {
-      var r = el("div", "meter-row");
-      r.innerHTML = "<span>" + row[0] + '<br><span class="meter-val">' + money(row[1]) + '</span></span><span class="meter-track"><span class="meter-fill" style="display:block;width:' + (row[1] / max * 100) + "%;background:" + row[2] + '"></span></span>';
-      r.tabIndex = 0;
-      bindTip(r, row[0] + ": " + money(row[1]));
-      meter.appendChild(r);
-    });
-    var cover = Math.round(m.depotMargin / m.depotCost * 100);
-    $("depot-note").textContent = "Melbourne margin covers the depot " + cover + "% this month. Rent, power and the van, paid by VIC sales alone.";
-    var pipe = $("melb-pipe");
-    m.pipe.forEach(function (p) {
-      pipe.appendChild(el("li", "", "<span><strong>" + esc(p.name) + '</strong><br><span class="pipe-sub">' + esc(p.sub) + '</span></span><span style="text-align:right"><strong>' + money(p.value) + '</strong><br><span class="pipe-sub">' + p.stage + "</span></span>"));
-    });
-  }
-
   /* MARKETING */
   function renderMkt() {
     DATA.queueTop.forEach(function (q) {
@@ -346,7 +300,6 @@
   renderLeadFilters();
   renderLeads();
   renderJobs();
-  renderMelb();
   renderMkt();
   var start = location.hash.replace("#", "");
   if (start && document.getElementById("screen-" + start)) show(start);

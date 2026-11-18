@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Hoists Hub (DEMO)</title>
-<meta name="theme-color" content="#1f2326">
+<meta name="theme-color" content="#222A2A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,6 +13,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Righteous&display=swap">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -20,7 +22,7 @@
 
 <header class="topbar">
   <div>
-    <div class="topbar-kicker">Titan + Sterling</div>
+    <div class="topbar-kicker">Sterling Automotive Equipment</div>
     <h1 class="topbar-title" id="screen-title">This month</h1>
   </div>
   <button class="ping-btn" id="simulate" type="button">Simulate new enquiry</button>
@@ -53,11 +55,6 @@
     <div class="card deal-card">
       <div class="deal-head">
         <h2 class="card-title">What the systems did, this month</h2>
-        <label class="toggle">
-          <input type="checkbox" id="sales-toggle">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-          <span class="toggle-label">Virginia runs sales (+10%)</span>
-        </label>
       </div>
       <table class="deal-table" id="deal-table"></table>
       <p class="deal-note">How my share works, one job at a time (the full breakdown is in your monthly report):</p>
@@ -79,20 +76,6 @@
       <div class="tiles tiles-3" id="job-tiles"></div>
     </div>
     <div id="job-days"></div>
-  </section>
-
-  <!-- MELBOURNE -->
-  <section class="screen" id="screen-melb" data-title="Melbourne">
-    <div class="tiles" id="melb-tiles"></div>
-    <div class="card">
-      <h2 class="card-title">Does the depot pay for itself?</h2>
-      <div class="meter" id="depot-meter"></div>
-      <p class="muted" id="depot-note"></p>
-    </div>
-    <div class="card">
-      <h2 class="card-title">VIC pipeline</h2>
-      <ul class="pipe-list" id="melb-pipe"></ul>
-    </div>
   </section>
 
   <!-- MARKETING -->
@@ -132,7 +115,6 @@
   <button class="tab is-active" data-screen="home" type="button"><span class="tab-icon" aria-hidden="true">&#9673;</span>Home</button>
   <button class="tab" data-screen="leads" type="button"><span class="tab-icon" aria-hidden="true">&#9776;</span>Leads<span class="tab-badge" id="lead-badge"></span></button>
   <button class="tab" data-screen="jobs" type="button"><span class="tab-icon" aria-hidden="true">&#9636;</span>Jobs</button>
-  <button class="tab" data-screen="melb" type="button"><span class="tab-icon" aria-hidden="true">&#9650;</span>Melbourne</button>
   <button class="tab" data-screen="mkt" type="button"><span class="tab-icon" aria-hidden="true">&#9733;</span>Marketing</button>
 </nav>
 
