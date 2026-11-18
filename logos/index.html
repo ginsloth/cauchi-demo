@@ -63,7 +63,11 @@ const V=[
  {n:44,kind:"harr2",t:"Like 40, swooshes flow out of the letters",d:"Round 9b: the lines now grow out of the S and the g like one pen stroke, tapering to a point.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE"},
  {n:45,kind:"harr2",t:"Like 41, flowing swooshes",d:"Rust script on cream, aqua frame, SYDNEY.",bg:"#e2dac2",frame:"#4fbbbc",script:"#ec4624",caps:"#222a2a",word:"SYDNEY",cls:9},
  {n:46,kind:"harr2",t:"Like 42, flowing swooshes",d:"Iron script on rust, cream frame, full name.",bg:"#ec4624",frame:"#e2dac2",script:"#222a2a",caps:"#e2dac2",word:"AUTOMOTIVE EQUIPMENT",cfs:20,cls:2,capY:280},
- {n:47,kind:"harr2",t:"Like 43, flowing swooshes",d:"Cream script on aqua, iron frame, EQUIPMENT. Same script as 44 to 46 so the swooshes join cleanly.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"EQUIPMENT"}
+ {n:47,kind:"harr2",t:"Like 43, flowing swooshes",d:"Cream script on aqua, iron frame, EQUIPMENT. Same script as 44 to 46 so the swooshes join cleanly.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"EQUIPMENT"},
+ {n:48,kind:"harr3",t:"Like 44, smooth even lines",d:"Round 9c: the lines are now one smooth even stroke with rounded ends, like the Harrison original.",bg:"#222a2a",frame:"#ec4624",script:"#e2dac2",caps:"#e2dac2",word:"AUTOMOTIVE"},
+ {n:49,kind:"harr3",t:"Like 45, smooth even lines",d:"Rust on cream, aqua frame, SYDNEY.",bg:"#e2dac2",frame:"#4fbbbc",script:"#ec4624",caps:"#222a2a",word:"SYDNEY",cls:9},
+ {n:50,kind:"harr3",t:"Like 46, smooth even lines",d:"Iron on rust, cream frame, full name.",bg:"#ec4624",frame:"#e2dac2",script:"#222a2a",caps:"#e2dac2",word:"AUTOMOTIVE EQUIPMENT",cfs:20,cls:2,capY:280},
+ {n:51,kind:"harr3",t:"Like 47, smooth even lines",d:"Cream on aqua, iron frame, EQUIPMENT.",bg:"#4fbbbc",frame:"#222a2a",script:"#e2dac2",caps:"#222a2a",word:"EQUIPMENT"}
 ];
 let UID=0;
 function drop(txt,attrs,col,n){return [...Array(n)].map((_,i)=>`<text ${attrs} transform="translate(${(i+1)*0.9} ${(i+1)*0.9})" fill="${col}" stroke="${col}" stroke-width="4" stroke-linejoin="round">${txt}</text>`).join("")}
@@ -141,7 +145,15 @@ function harr2(v){const bg=v.bg,sc=`x="300" y="226" text-anchor="middle" font-fa
  <text ${sc} fill="${v.script}" stroke="${bg}" stroke-width="16" stroke-linejoin="round" paint-order="stroke">Sterling</text>
  ${sw(L)}${sw(R)}<text ${sc} fill="${v.script}">Sterling</text>
  <text x="300" y="${v.capY||286}" text-anchor="middle" font-family="Montserrat" font-weight="700" font-size="${v.cfs||32}" letter-spacing="${v.cls||5}" fill="${v.caps}">${v.word}</text></svg>`}
-const draw=v=>v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
+function harr3(v){const bg=v.bg,sc=`x="300" y="226" text-anchor="middle" font-family="Yellowtail" font-size="132"`;
+ const P=[`M132,211 C104,221 72,226 36,225`,`M484,213 C512,206 540,203 566,203`];
+ const ln=(c,w)=>P.map(d=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`).join("");
+ return `<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="400" rx="16" fill="${bg}"/>
+ <rect x="92" y="118" width="416" height="196" rx="62" fill="none" stroke="${v.frame}" stroke-width="11"/>
+ ${ln(bg,24)}<text ${sc} fill="${bg}" stroke="${bg}" stroke-width="16" stroke-linejoin="round">Sterling</text>
+ ${ln(v.script,9)}<text ${sc} fill="${v.script}">Sterling</text>
+ <text x="300" y="${v.capY||286}" text-anchor="middle" font-family="Montserrat" font-weight="700" font-size="${v.cfs||32}" letter-spacing="${v.cls||5}" fill="${v.caps}">${v.word}</text></svg>`}
+const draw=v=>v.kind==="harr3"?harr3(v):v.kind==="harr2"?harr2(v):v.kind==="harr"?harr(v):v.kind==="pierce"?pierce(v):v.kind==="amf"?amf(v):v.kind==="bob"?bob(v):v.kind==="label"?label(v):v.kind==="moto"?moto(v):v.kind==="script"?scr(v):badge(v);
 function badge(v,id){
  const fs=v.size||92, big=fs*1.32, drops=[...Array(9)].map((_,i)=>`<text x="${300+(i+1)*0.9}" y="${128+(i+1)*0.9}" fill="${v.drop}" stroke="${v.drop}" stroke-width="10" stroke-linejoin="round">${word(v,fs,big)}</text>`).join("");
  return `<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sterling logo option ${v.n}">
