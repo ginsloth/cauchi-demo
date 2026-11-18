@@ -40,7 +40,7 @@
       var suburb = (f.get("suburb")||"").toString().trim() || "suburb not given";
       var sterling = !!SALES[need];
       var sender = sterling ? "Sterling Automotive Equipment" : "Titan Automotive Equipment";
-      var matt = sterling ? "Matt (Sterling)" : "Matt (Titan)";
+      var matt = sterling ? "Matt (Sterling)" : "Chu (Titan)";
 
       btn.disabled = true; var label = btn.textContent; btn.textContent = "Sending...";
       stage.innerHTML = "";
@@ -50,7 +50,7 @@
         msg.textContent = "Thanks " + first + ", check your phone, we've just texted you.";
         stage.innerHTML =
           '<div class="phone"><div class="phone-bar">' + esc(sender) + '</div>' +
-          '<div class="sms"><p>hey ' + esc(first.toLowerCase()) + ', got your message about ' + esc(NEED_WORDS[need]||"your enquiry") +
+          '<div class="sms"><p>hey ' + esc(first.toLowerCase()) + ', thanks for reaching out about ' + esc(NEED_WORDS[need]||"your enquiry") +
           '. we\'ll give you a buzz shortly, or reply here with a good time</p><span>now</span></div></div>';
         requestAnimationFrame(function(){ stage.querySelector(".phone").classList.add("in"); });
 
